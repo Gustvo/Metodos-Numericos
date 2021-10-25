@@ -3,11 +3,10 @@
 #include "zero_de_funcoes.hpp"
 
 int main(int nargs, char **cargs) {
-  const int numeroDeCasasDecimais = (nargs > 1 ? std::stoi(cargs[1]) : 4);
-  imprimeExemplos(numeroDeCasasDecimais);
+  Configuracao config;
+  config.numeroDeCasasDecimais = (nargs > 1 ? std::stoi(cargs[1]) : 4);
 
-  const int repeticoes = 5000;
-  cronometraEImprimeResultados(repeticoes, microsegundos);
+  imprimeExemplos(config);
 
   return EXIT_SUCCESS;
 }

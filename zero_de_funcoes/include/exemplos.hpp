@@ -1,9 +1,12 @@
 #pragma once
 
-#include "intervalo.hpp"
-#include <chrono>
+#include "cronometragem.hpp"
 
-enum FormatoDuracao { microsegundos, milisegundos, nanosegundos };
+struct Configuracao {
+  FormatoDuracao unidadeDeTempo = microsegundos;
+  int numeroDeCasasDecimais = 4;
+  int numeroDeRepeticoesParaCronometragem = 5000;
+};
 
 // Utiliza as funções definidas em "zero_de_funcoes.hpp", em
 // conjunto com os valores utilizados nos exemploes dados nos PDFs para
@@ -13,5 +16,7 @@ enum FormatoDuracao { microsegundos, milisegundos, nanosegundos };
 // formato:
 // nome_do_metodo: x = n
 void imprimeExemplos(int numeroDeCasasDecimais);
+
+void imprimeExemplos(Configuracao);
 
 void cronometraEImprimeResultados(const int repeticoes, FormatoDuracao f);

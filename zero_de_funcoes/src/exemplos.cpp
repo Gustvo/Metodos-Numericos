@@ -1,11 +1,10 @@
 #include "exemplos.hpp"
+#include "cronometragem.hpp"
 #include "metodo.hpp"
 #include "zero_de_funcoes.hpp"
 
-#include <chrono>
 #include <iomanip>
 #include <iostream>
-#include <utility>
 #include <vector>
 
 // f(x) = x³ - 9x +3
@@ -32,90 +31,35 @@ static std::vector<Metodo> getMethods() {
   return functions;
 }
 
-static void imprimeResultadoDeExemplos(Metodo metodo,
-                                       int numeroDeCasasDecimais) {
+static void imprimeResultadoDeExemplos(Configuracao config, Metodo metodo) {
   auto resultado = metodo.funcao();
-  std::cout << std::setprecision(numeroDeCasasDecimais) << std::fixed
+  auto cronometragem =
+      cronometraFuncao(config.numeroDeRepeticoesParaCronometragem,
+                       metodo.funcao, config.unidadeDeTempo);
+  std::cout << std::setprecision(config.numeroDeCasasDecimais) << std::fixed
             << metodo.nome << ":\tx = " << resultado.first << "\t"
-            << resultado.second << " iteracoes"<< '\n';
+            << resultado.second << "\t\t" << cronometragem.duracao << ' '
+            << cronometragem.unidade << std::endl;
 }
 
-template <typename T, typename... Args>
-static std::string format(T str, Args... args) {
-  std::string output;
-  output.resize(1000);
-  sprintf(output.data(), str, args...);
-  return output;
+static void imprimeCabecalho() {
+  std::cout << "f(x) = x³ - 9x + 3\n"
+            << "ε = " << std::setprecision(3) << ε << "\nIntervalo = ["
+            << intervalo.a << ", " << intervalo.b
+            << "]\n\n"
+               "\tNome\tx->f(x)=0\tIterações\tTempo*\n";
 }
 
-void imprimeExemplos(int numeroDeCasasDecimais) {
-  std::string header = format("f(x) = x³ - 9x + 3\n"
-                              "ε = %.3f\n"
-                              "Intervalo = [%.1f, %.1f]\n",
-                              ε, intervalo.a, intervalo.b);
-  std::cout << header << std::endl;
-  for (auto metodo : getMethods())
-    imprimeResultadoDeExemplos(metodo, numeroDeCasasDecimais);
-  std::cout << std::endl;
+static void imprimeNota(int repeticoes) {
+  std::cout << "\n"
+               "*Tempo que a função demora para encontrar o resultado "
+            << repeticoes << " vezes\n";
 }
 
-struct _ResultadoCronometragem {
-  std::string metodo;
-  long duracao;
-};
-
-using ResultadoCronometragem = std::vector<_ResultadoCronometragem>;
-
-template <typename formatoDuracao>
-static ResultadoCronometragem cronometraExemplos(const int repeticoes) {
-  using clock = std::chrono::steady_clock;
-  using time_point = std::chrono::time_point<clock>;
-  using std::chrono::duration_cast;
-
-  ResultadoCronometragem resultados;
-
+void imprimeExemplos(Configuracao config) {
+  imprimeCabecalho();
   for (auto metodo : getMethods()) {
-    time_point start = clock::now();
-    for (int i = 0; i < repeticoes; ++i)
-      metodo.funcao();
-
-    auto duracao = duration_cast<formatoDuracao>(clock::now() - start).count();
-    resultados.push_back({metodo.nome, duracao});
+    imprimeResultadoDeExemplos(config, metodo);
   }
-
-  return resultados;
-}
-
-static void ImprimeResultadosDeCronometragem(int repeticoes,
-                                             ResultadoCronometragem resultados,
-                                             const std::string unidade) {
-  std::cout << "Tempos (x" << repeticoes << "):\n";
-  for (auto medicao : resultados) {
-    std::cout << medicao.metodo << ":\t" << medicao.duracao << ' ' << unidade
-              << '\n';
-  }
-}
-
-void cronometraEImprimeResultados(const int repeticoes,
-                                  const FormatoDuracao formatoDuracao) {
-  ResultadoCronometragem resultados;
-  std::string unidade;
-  switch (formatoDuracao) {
-  case FormatoDuracao::nanosegundos:
-    resultados = cronometraExemplos<std::chrono::nanoseconds>(repeticoes);
-    unidade = "ns";
-    break;
-
-  case FormatoDuracao::microsegundos:
-    resultados = cronometraExemplos<std::chrono::microseconds>(repeticoes);
-    unidade = "µs";
-    break;
-
-  case FormatoDuracao::milisegundos:
-    resultados = cronometraExemplos<std::chrono::milliseconds>(repeticoes);
-    unidade = "ms";
-    break;
-  }
-
-  ImprimeResultadosDeCronometragem(repeticoes, resultados, unidade);
+  imprimeNota(config.numeroDeRepeticoesParaCronometragem);
 }
