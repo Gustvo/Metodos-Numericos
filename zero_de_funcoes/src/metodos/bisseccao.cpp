@@ -1,6 +1,6 @@
 #include "zero_de_funcoes.hpp"
 
-std::pair<double, int> bisseccao(Intervalo intervalo, const double eps, Funcao f) {
+_func_sig bisseccao(Intervalo intervalo, const double eps, Funcao f) {
   double xmed;
   int iteracoes = 0;
   while (std::abs(intervalo.b - intervalo.a) > eps) {
@@ -14,5 +14,5 @@ std::pair<double, int> bisseccao(Intervalo intervalo, const double eps, Funcao f
       intervalo.a = xmed;
     iteracoes++;
   }
-  return { xmed, iteracoes };
+  return {xmed, iteracoes};
 }

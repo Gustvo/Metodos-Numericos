@@ -1,8 +1,8 @@
 #include "zero_de_funcoes.hpp"
 #include <cmath>
 
-std::pair<double, int> newton_raphson(const double eps1, const double eps2,
-                                      double x, Funcao f, Funcao derivada) {
+_func_sig newton_raphson(const double eps1, const double eps2, double x,
+                         Funcao f, Funcao derivada) {
   double xAnterior;
   int iteracoes = 0;
   if (std::abs(f(x)) < eps2)

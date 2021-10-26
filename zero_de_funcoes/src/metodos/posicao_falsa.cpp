@@ -1,8 +1,8 @@
 #include "zero_de_funcoes.hpp"
 #include <cmath>
 
-std::pair<double, int> posicao_falsa(Intervalo intervalo, const double eps1, const double eps2,
-                     Funcao f) {
+_func_sig posicao_falsa(Intervalo intervalo, const double eps1,
+                        const double eps2, Funcao f) {
   int iteracoes = 0;
   double xmed;
   while (std::abs(intervalo.b - intervalo.a) >= eps1 &&
@@ -19,5 +19,5 @@ std::pair<double, int> posicao_falsa(Intervalo intervalo, const double eps1, con
       intervalo.a = xmed;
     iteracoes++;
   }
-  return { xmed, iteracoes };
+  return {xmed, iteracoes};
 }

@@ -1,7 +1,7 @@
 #include "zero_de_funcoes.hpp"
 
-std::pair<double, int> secante(const double eps1, const double eps2, double x0,
-                               double x1, Funcao f) {
+_func_sig secante(const double eps1, const double eps2, double x0, double x1,
+                  Funcao f) {
   double x, xAnterior, xAnterior2;
   int iteracoes = 0;
 
