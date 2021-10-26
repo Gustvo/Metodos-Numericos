@@ -1,3 +1,5 @@
+# Zero de funções
+
 f(x) = x³ - 9x + 3
 
 ε = 0.001
