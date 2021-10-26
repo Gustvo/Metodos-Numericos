@@ -31,21 +31,10 @@ static std::vector<Metodo> getMethods() {
   return functions;
 }
 
-static void imprimeResultadoDeExemplos(Configuracao config, Metodo metodo) {
-  auto resultado = metodo.funcao();
-  auto cronometragem =
-      cronometraFuncao(config.numeroDeRepeticoesParaCronometragem,
-                       metodo.funcao, config.unidadeDeTempo);
-  std::cout << std::setprecision(config.numeroDeCasasDecimais) << std::fixed
-            << metodo.nome << ":\tx = " << resultado.first << "\t"
-            << resultado.second << "\t\t" << cronometragem.duracao << ' '
-            << cronometragem.unidade << std::endl;
-}
-
 static void imprimeCabecalho() {
   std::cout << "f(x) = x³ - 9x + 3\n"
-            << "ε = " << std::setprecision(3) << ε << "\nIntervalo = ["
-            << intervalo.a << ", " << intervalo.b
+            << "ε = " << ε << "\nIntervalo = [" << intervalo.a << ", "
+            << intervalo.b
             << "]\n\n"
                "\tNome\tx->f(x)=0\tIterações\tTempo*\n";
 }
@@ -56,10 +45,50 @@ static void imprimeNota(int repeticoes) {
             << repeticoes << " vezes\n";
 }
 
-void imprimeExemplos(Configuracao config) {
-  imprimeCabecalho();
+struct _resultados {
+  std::string nome;
+  double x;
+  int iteracoes;
+  long duracao;
+  std::string unidadeDeTempo;
+};
+
+static void imprimeLinha(int numeroDeCasasDecimais, _resultados resultado) {
+  std::cout << std::setprecision(numeroDeCasasDecimais) << std::fixed
+            << resultado.nome << ":\tx = " << resultado.x << "\t"
+            << resultado.iteracoes << "\t\t" << resultado.duracao << ' '
+            << resultado.unidadeDeTempo << std::endl;
+}
+
+static _resultados calculaECronometraMetodo(Configuracao config,
+                                            Metodo metodo) {
+  auto [x, iteracoes] = metodo.funcao();
+  auto [duracao, unidade] =
+      cronometraFuncao(config.numeroDeRepeticoesParaCronometragem,
+                       metodo.funcao, config.unidadeDeTempo);
+
+  return {metodo.nome, x, iteracoes, duracao, unidade};
+}
+
+static std::vector<_resultados>
+calculaECronometraExemplos(Configuracao config) {
+  std::vector<_resultados> tabela;
   for (auto metodo : getMethods()) {
-    imprimeResultadoDeExemplos(config, metodo);
+    auto resultado = calculaECronometraMetodo(config, metodo);
+    tabela.push_back(resultado);
   }
+  return tabela;
+}
+
+static void imprimeResultados(const std::vector<_resultados> tabela,
+                              Configuracao config) {
+  imprimeCabecalho();
+  for (auto linha : tabela)
+    imprimeLinha(config.numeroDeCasasDecimais, linha);
   imprimeNota(config.numeroDeRepeticoesParaCronometragem);
+}
+
+void calculaEImprimeExemplos(Configuracao config) {
+  auto resultados = calculaECronometraExemplos(config);
+  imprimeResultados(resultados, config);
 }
