@@ -1,7 +1,6 @@
-#include "cronometragem.hpp"
 #include "exemplos.hpp"
-#include "metodo.hpp"
 #include "zero_de_funcoes.hpp"
+#include "zero_de_polinomios.hpp"
 
 int main(int nargs, char **cargs) {
   Configuracao config = {.unidadeDeTempo = microsegundos,

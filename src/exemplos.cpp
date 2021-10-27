@@ -2,6 +2,7 @@
 #include "cronometragem.hpp"
 #include "metodo.hpp"
 #include "zero_de_funcoes.hpp"
+#include "zero_de_polinomios.hpp"
 
 #include <iomanip>
 #include <iostream>
@@ -12,6 +13,8 @@ static double func(double x) { return x * x * x - 9 * x + 3; }
 
 // f'(x) = 3x² - 9
 static double func_derivada(double x) { return 3 * x * x - 9; }
+
+static Polinomio polinomio = {1, 0, -9, 3};
 
 static Intervalo intervalo = {0, 1}; // Intervalo usado em todas as questões
 static double ε = 0.001;             // ε usado em todas as questões
@@ -27,6 +30,8 @@ static std::vector<Metodo> getMethods() {
                          return newton_raphson(ε, ε, 0.5, func, func_derivada);
                        }});
   functions.push_back({"Secante", [=]() { return secante(ε, ε, 0, 1, func); }});
+  functions.push_back(
+      {"Birge-Vieta", [=]() { return birgeVieta(ε, ε, 1, polinomio); }});
 
   return functions;
 }
