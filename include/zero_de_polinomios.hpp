@@ -2,7 +2,6 @@
 
 #include "zero_de_funcoes.hpp"
 
-#include <string>
 #include <vector>
 
 using Polinomio = std::vector<double>;

@@ -1,14 +1,12 @@
 #include "zero_de_polinomios.hpp"
 
-ResultadoHorner horner(Polinomio polinomio, const double x) {
-  double resultado = polinomio.front();
-  double derivada, anterior;
-  derivada = anterior = resultado;
-  for (int i = 1; i < polinomio.size(); ++i) {
-    resultado = polinomio[i] + resultado * x;
-    if (polinomio.data() + i == &polinomio.back()) [[unlikely]]
-      derivada = anterior + derivada * x;
-    anterior = resultado;
+ResultadoHorner horner(Polinomio coeficientes, const double x) {
+  double resultado, derivada;
+  resultado = derivada = coeficientes[0];
+  for (int i = 1; i < coeficientes.size(); ++i) {
+    resultado = coeficientes[i] + resultado * x;
+    if (&coeficientes[i] != &coeficientes.back()) [[likely]]
+      derivada = resultado + derivada * x;
   }
 
   return {resultado, derivada};
