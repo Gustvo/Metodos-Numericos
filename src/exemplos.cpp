@@ -8,12 +8,13 @@
 #include <iostream>
 #include <vector>
 
-// f(x) = x³ - 9x +3
+// f(x) = x³ - 9x + 3
 static double func(double x) { return x * x * x - 9 * x + 3; }
 
 // f'(x) = 3x² - 9
 static double func_derivada(double x) { return 3 * x * x - 9; }
 
+// p(x) = x³ - 9x + 3
 static Polinomio polinomio = {1, 0, -9, 3};
 
 static Intervalo intervalo = {0, 1}; // Intervalo usado em todas as questões
@@ -38,9 +39,8 @@ static std::vector<Metodo> getMethods() {
 
 static void imprimeCabecalho() {
   std::cout << "f(x) = x³ - 9x + 3\n"
-            << "ε = " << ε << "\nIntervalo = [" << intervalo.a << ", "
-            << intervalo.b
-            << "]\n\n"
+            << "ε = " << ε
+            << "\n\n"
                "\tNome\tx->f(x)=0\tIterações\tTempo*\n";
 }
 
@@ -60,7 +60,7 @@ struct _resultados {
 
 static void imprimeLinha(int numeroDeCasasDecimais, _resultados resultado) {
   std::cout << std::setprecision(numeroDeCasasDecimais) << std::fixed
-            << resultado.nome << ":\tx = " << resultado.x << "\t"
+            << resultado.nome << ":\t" << resultado.x << "\t"
             << resultado.iteracoes << "\t\t" << resultado.duracao << ' '
             << resultado.unidadeDeTempo << std::endl;
 }

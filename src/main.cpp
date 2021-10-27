@@ -4,7 +4,7 @@
 
 int main(int nargs, char **cargs) {
   Configuracao config = {.unidadeDeTempo = microsegundos,
-                         .numeroDeCasasDecimais = 4,
+                         .numeroDeCasasDecimais = 7,
                          .numeroDeRepeticoesParaCronometragem = 10000};
 
   if (nargs > 1)
