@@ -30,3 +30,16 @@ _func_sig birgeVieta(const double eps1, const double eps2, double x,
 
   return {x, iteracoes};
 }
+
+_func_sig birgeVieta(const int nIteracoes, double x,
+                     Polinomio polinomio) {
+  double xAnterior;
+  auto resultado = horner(polinomio, x);
+
+  for (int i = 0; i < nIteracoes; ++i) {
+    xAnterior = x;
+    resultado = horner(polinomio, x);
+    x = xAnterior - resultado.polinomio / resultado.derivada;
+  }
+  return {x, nIteracoes};
+}

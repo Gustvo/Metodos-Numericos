@@ -13,3 +13,5 @@ struct ResultadoHorner {
 ResultadoHorner horner(Polinomio, const double x);
 
 _func_sig birgeVieta(const double eps1, const double eps2, double x, Polinomio polinomio);
+
+_func_sig birgeVieta(const int nIteracoes, double x, Polinomio polinomio);

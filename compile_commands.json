@@ -1,122 +1,130 @@
 [
- {
-  "directory": "/home/gustavo/Documents/c++/metodos_numericos",
-  "arguments": [
-   "clang++",
-   "-Wall",
-   "-std=c++20",
-   "-Ofast",
-   "-c",
-   "-o",
-   "objs/exemplos.o",
-   "src/exemplos.cpp",
-   "-Iinclude"
-  ],
-  "file": "src/exemplos.cpp"
- },
- {
-  "directory": "/home/gustavo/Documents/c++/metodos_numericos",
-  "arguments": [
-   "clang++",
-   "-Wall",
-   "-std=c++20",
-   "-Ofast",
-   "-c",
-   "-o",
-   "objs/zero_de_funcoes/bisseccao.o",
-   "src/zero_de_funcoes/bisseccao.cpp",
-   "-Iinclude"
-  ],
-  "file": "src/zero_de_funcoes/bisseccao.cpp"
- },
- {
-  "directory": "/home/gustavo/Documents/c++/metodos_numericos",
-  "arguments": [
-   "clang++",
-   "-Wall",
-   "-std=c++20",
-   "-Ofast",
-   "-c",
-   "-o",
-   "objs/zero_de_funcoes/secante.o",
-   "src/zero_de_funcoes/secante.cpp",
-   "-Iinclude"
-  ],
-  "file": "src/zero_de_funcoes/secante.cpp"
- },
- {
-  "directory": "/home/gustavo/Documents/c++/metodos_numericos",
-  "arguments": [
-   "clang++",
-   "-Wall",
-   "-std=c++20",
-   "-Ofast",
-   "-c",
-   "-o",
-   "objs/zero_de_funcoes/newton_raphson.o",
-   "src/zero_de_funcoes/newton_raphson.cpp",
-   "-Iinclude"
-  ],
-  "file": "src/zero_de_funcoes/newton_raphson.cpp"
- },
- {
-  "directory": "/home/gustavo/Documents/c++/metodos_numericos",
-  "arguments": [
-   "clang++",
-   "-Wall",
-   "-std=c++20",
-   "-Ofast",
-   "-c",
-   "-o",
-   "objs/zero_de_funcoes/posicao_falsa.o",
-   "src/zero_de_funcoes/posicao_falsa.cpp",
-   "-Iinclude"
-  ],
-  "file": "src/zero_de_funcoes/posicao_falsa.cpp"
- },
- {
-  "directory": "/home/gustavo/Documents/c++/metodos_numericos",
-  "arguments": [
-   "clang++",
-   "-Wall",
-   "-std=c++20",
-   "-Ofast",
-   "-c",
-   "-o",
-   "objs/cronometragem.o",
-   "src/cronometragem.cpp",
-   "-Iinclude"
-  ],
-  "file": "src/cronometragem.cpp"
- },
- {
-  "directory": "/home/gustavo/Documents/c++/metodos_numericos",
-  "arguments": [
-   "clang++",
-   "-Wall",
-   "-std=c++20",
-   "-Ofast",
-   "-c",
-   "-o",
-   "objs/main.o",
-   "src/main.cpp",
-   "-Iinclude"
-  ],
-  "file": "src/main.cpp"
- },
- {
-  "directory": "/home/gustavo/Documents/c++/metodos_numericos",
-  "arguments": [
-   "clang++",
-   "-Wall",
-   "-std=c++20",
-   "-Ofast",
-   "-c",
-   "-o",
-   "objs/zero_de_polinomios/birge_vieta.o",
-   "src/zero_de_polinomios/birge_vieta.cpp",
-   "-Iinclude"
-  ],
-  "file": "src/zero_de_polinomios/birge_vieta.cpp"
- }
+  {
+    "arguments": [
+      "/usr/bin/clang++",
+      "-Wall",
+      "-std=c++20",
+      "-Ofast",
+      "-c",
+      "-Iinclude",
+      "-o",
+      "objs/cronometragem.o",
+      "src/cronometragem.cpp"
+    ],
+    "directory": "/home/gustavo/Documents/metodos-numericos",
+    "file": "/home/gustavo/Documents/metodos-numericos/src/cronometragem.cpp",
+    "output": "/home/gustavo/Documents/metodos-numericos/objs/cronometragem.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/clang++",
+      "-Wall",
+      "-std=c++20",
+      "-Ofast",
+      "-c",
+      "-Iinclude",
+      "-o",
+      "objs/main.o",
+      "src/main.cpp"
+    ],
+    "directory": "/home/gustavo/Documents/metodos-numericos",
+    "file": "/home/gustavo/Documents/metodos-numericos/src/main.cpp",
+    "output": "/home/gustavo/Documents/metodos-numericos/objs/main.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/clang++",
+      "-Wall",
+      "-std=c++20",
+      "-Ofast",
+      "-c",
+      "-Iinclude",
+      "-o",
+      "objs/exemplos.o",
+      "src/exemplos.cpp"
+    ],
+    "directory": "/home/gustavo/Documents/metodos-numericos",
+    "file": "/home/gustavo/Documents/metodos-numericos/src/exemplos.cpp",
+    "output": "/home/gustavo/Documents/metodos-numericos/objs/exemplos.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/clang++",
+      "-Wall",
+      "-std=c++20",
+      "-Ofast",
+      "-c",
+      "-Iinclude",
+      "-o",
+      "objs/zero_de_funcoes/newton_raphson.o",
+      "src/zero_de_funcoes/newton_raphson.cpp"
+    ],
+    "directory": "/home/gustavo/Documents/metodos-numericos",
+    "file": "/home/gustavo/Documents/metodos-numericos/src/zero_de_funcoes/newton_raphson.cpp",
+    "output": "/home/gustavo/Documents/metodos-numericos/objs/zero_de_funcoes/newton_raphson.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/clang++",
+      "-Wall",
+      "-std=c++20",
+      "-Ofast",
+      "-c",
+      "-Iinclude",
+      "-o",
+      "objs/zero_de_funcoes/bisseccao.o",
+      "src/zero_de_funcoes/bisseccao.cpp"
+    ],
+    "directory": "/home/gustavo/Documents/metodos-numericos",
+    "file": "/home/gustavo/Documents/metodos-numericos/src/zero_de_funcoes/bisseccao.cpp",
+    "output": "/home/gustavo/Documents/metodos-numericos/objs/zero_de_funcoes/bisseccao.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/clang++",
+      "-Wall",
+      "-std=c++20",
+      "-Ofast",
+      "-c",
+      "-Iinclude",
+      "-o",
+      "objs/zero_de_funcoes/secante.o",
+      "src/zero_de_funcoes/secante.cpp"
+    ],
+    "directory": "/home/gustavo/Documents/metodos-numericos",
+    "file": "/home/gustavo/Documents/metodos-numericos/src/zero_de_funcoes/secante.cpp",
+    "output": "/home/gustavo/Documents/metodos-numericos/objs/zero_de_funcoes/secante.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/clang++",
+      "-Wall",
+      "-std=c++20",
+      "-Ofast",
+      "-c",
+      "-Iinclude",
+      "-o",
+      "objs/zero_de_funcoes/posicao_falsa.o",
+      "src/zero_de_funcoes/posicao_falsa.cpp"
+    ],
+    "directory": "/home/gustavo/Documents/metodos-numericos",
+    "file": "/home/gustavo/Documents/metodos-numericos/src/zero_de_funcoes/posicao_falsa.cpp",
+    "output": "/home/gustavo/Documents/metodos-numericos/objs/zero_de_funcoes/posicao_falsa.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/clang++",
+      "-Wall",
+      "-std=c++20",
+      "-Ofast",
+      "-c",
+      "-Iinclude",
+      "-o",
+      "objs/zero_de_polinomios/birge_vieta.o",
+      "src/zero_de_polinomios/birge_vieta.cpp"
+    ],
+    "directory": "/home/gustavo/Documents/metodos-numericos",
+    "file": "/home/gustavo/Documents/metodos-numericos/src/zero_de_polinomios/birge_vieta.cpp",
+    "output": "/home/gustavo/Documents/metodos-numericos/objs/zero_de_polinomios/birge_vieta.o"
+  }
 ]
