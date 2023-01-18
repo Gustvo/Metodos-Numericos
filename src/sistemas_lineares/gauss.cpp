@@ -5,7 +5,7 @@
 #include <stdexcept>
 #include <iostream>
 
-std::vector<float> divideLinha(std::vector<float> linha) {
+static std::vector<float> divideLinha(std::vector<float> linha) {
 	float primeiroNaoNulo;
 	bool primeiroEncontrado = false;
 	for (auto i = 0; i < linha.size(); ++i) {
@@ -20,7 +20,7 @@ std::vector<float> divideLinha(std::vector<float> linha) {
 	return linha;
 }
 
-static int checaAncora(std::vector<float> linha, int indice) {
+static int checaPivo(std::vector<float> linha, int indice) {
     for (int i = 0; i < indice; ++i) {
         if(linha[i])
             return i;
@@ -28,61 +28,54 @@ static int checaAncora(std::vector<float> linha, int indice) {
     return -1;
 }
 
-static void imprimeMatriz(std::vector<float> matriz, int tamanho) {
-    for (int i = 0; i < tamanho; ++i) {
-        for (int j = 0; i < tamanho; ++j)
-            std::cout << matriz[i*tamanho + j] << ' ';
-        std::cout << '\n';
-    }
+
+static bool validaMatrizExtendida(std::vector<float>& matriz, int tamanho) {
+    if (sqrt(matriz.size() - tamanho) != tamanho)
+        return false;
+    return true;
 }
 
+template <typename T>
+static std::vector<T> extraiLinha(std::vector<T> matrizExtendida, int tamanho, int indice) {
+    std::vector<T> linha(matrizExtendida.begin() + (tamanho+1)*indice, matrizExtendida.begin()+(tamanho+1)*(indice+1));
+    return linha;
+}
 
-
-std::vector<float> gauss(std::vector<float> matrizCoeficientes, std::vector<float> matrizRes) {
-	const int tamanhoMatriz = matrizRes.size();
-    if (tamanhoMatriz != sqrt(matrizCoeficientes.size()))
+std::vector<float> gauss(std::vector<float> matrizExtendida, int tamanho) {
+    if (!validaMatrizExtendida(matrizExtendida, tamanho))
         throw(std::invalid_argument("Tamanho de matriz incorreto"));
 
     std::vector<float> novaMatriz;
 
     // Primeiro passe zera todos os coeficientes a esquerda do pivô
-	for (int i = 0; i < tamanhoMatriz; ++i) {
-        std::vector<float> linha(matrizCoeficientes.begin() + tamanhoMatriz * i, matrizCoeficientes.begin()+tamanhoMatriz*(1+i));
-        linha.push_back(matrizRes[i]);
-        int indice = checaAncora(linha, i);
+	for (int i = 0; i < tamanho; ++i) {
+        auto linha = extraiLinha<float>(matrizExtendida, tamanho, i);
+        int indice = checaPivo(linha, i);
         while (indice != -1) {
             float fator = linha[indice];
-            std::cerr << "[Indice, fator]: [" << indice << ", " << linha[indice] << ']' << std::endl;
-            for (auto entrada : linha)
-                std::cerr << entrada << ' ';
-            std::cerr << "\n -----subtraindo----\n";
-            for (int j = 0; j < tamanhoMatriz + 1; ++j) {
-                std::cerr << novaMatriz[(tamanhoMatriz+1)*indice +j] << ' ';
-                linha[j] -= fator*novaMatriz[(tamanhoMatriz+1)*indice+j];
-            }
-            std::cerr << std::endl;
-            for (auto entrada : linha)
-                std::cerr << entrada << ' ';
-            std::cerr << std::endl;
-            indice = checaAncora(linha, i);
+            for (int j = 0; j < tamanho + 1; ++j)
+                linha[j] -= fator*novaMatriz[(tamanho+1)*indice+j];
+
+            indice = checaPivo(linha, i);
         }
         linha = divideLinha(linha);
-        std::cerr << "----Inserindo linha na Matriz----\n";
-        for (auto entrada : linha) {
-            std::cerr << entrada << ' ';
+        for (auto entrada : linha) 
             novaMatriz.push_back(entrada);
-        }
-        std::cerr << std::endl;
         
 	}
     // Segundo passe zera os coeficientes a direita do pivô
-    for (int i = tamanhoMatriz - 1; i >= 0; --i) {
-        for (int j = i+1; j < tamanhoMatriz; ++j) {
-            float fator = novaMatriz[i*(tamanhoMatriz+1)+j];
-            for (int k = 0; k < tamanhoMatriz+1; ++k) {
-                novaMatriz[i*(tamanhoMatriz+1)+k] -= fator*novaMatriz[j*(tamanhoMatriz+1)+k];
+    for (int i = tamanho - 1; i >= 0; --i) {
+        for (int j = i+1; j < tamanho; ++j) {
+            float fator = novaMatriz[i*(tamanho+1)+j];
+            for (int k = 0; k < tamanho+1; ++k) {
+                novaMatriz[i*(tamanho+1)+k] -= fator*novaMatriz[j*(tamanho+1)+k];
             }
         }
     }
-    return novaMatriz;
+
+
+    std::vector<float> matrizResultado;
+    for (int i = 0; i < tamanho; ++i)
+        matrizResultado.push_back(novaMatriz[tamanho+(tamanho+1)*i]);
+    return matrizResultado;
 }
