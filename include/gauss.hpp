@@ -2,5 +2,4 @@
 
 #include <vector>
 
-std::vector<float> gauss(std::vector<float> coeficientes, std::vector<float> res) ;
-
+std::vector<double> gauss(std::vector<double> matrizExtendida, int tamanho) ;
