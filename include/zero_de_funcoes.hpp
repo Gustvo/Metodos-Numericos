@@ -1,13 +1,9 @@
 #pragma once
 
+#include "func_sig.hpp"
 #include "intervalo.hpp"
 
 extern "C" {
-struct _func_sig {
-  double x;
-  int iteracoes;
-};
-
 typedef double (*Funcao)(double);
 
 _func_sig bisseccao(Intervalo i, const double eps, Funcao f);

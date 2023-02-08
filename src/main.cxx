@@ -1,7 +1,6 @@
 #include "aproximacao_de_funcoes.hpp"
 #include "exemplos.hpp"
-#include "gauss.hpp"
-#include "lu.hpp"
+#include "sistemas_lineares.hpp"
 #include "zero_de_funcoes.hpp"
 #include "zero_de_polinomios.hpp"
 #include <cmath>
@@ -32,7 +31,8 @@ void testaGauss(std::pair<std::vector<double>, int> entrada) {
   std::vector<double> matrizExtendida = entrada.first;
 
   try {
-    auto resultado = gauss(matrizExtendida, tamanhoMatriz);
+    std::vector<double> resultado(tamanhoMatriz);
+    gauss(matrizExtendida.data(), tamanhoMatriz, resultado.data());
     std::cout << "Gauss: { ";
     for (auto x : resultado)
       std::cout << x << " ";
@@ -47,7 +47,8 @@ void testaLU(std::pair<std::vector<double>, int> entrada) {
   auto matrizExtendida = entrada.first;
 
   try {
-    auto resultado = lu(matrizExtendida, tamanhoMatriz);
+    std::vector<double> resultado(tamanhoMatriz);
+    lu(matrizExtendida.data(), tamanhoMatriz, resultado.data());
     std::cout << "LU: { ";
     for (auto x : resultado)
       std::cout << x << " ";
@@ -69,10 +70,10 @@ int main(int nargs, char **cargs) {
 
   // calculaEImprimeExemplos(config);
 
-  // auto entrada = lerEntrada<double>();
+  auto entrada = lerEntrada<double>();
 
-  // testaLU(entrada);   // { 4 2 4 }ᵀ
-  // testaGauss(entrada);
+  // testaLU(entrada); // { 4 2 4 }ᵀ
+  //  testaGauss(entrada);
   //
   std::vector<double> x = {1, 2, 3, 4, 5, 6, 7, 8};
   std::vector<double> y = {0.5, 0.6, 0.9, 0.8, 1.2, 1.5, 1.7, 2.0};

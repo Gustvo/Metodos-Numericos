@@ -1,6 +1,6 @@
 #pragma once
 
-#include "zero_de_funcoes.hpp"
+#include "func_sig.hpp"
 #include <cstddef>
 
 extern "C" {

@@ -1,5 +1,5 @@
 #include "aproximacao_de_funcoes.hpp"
-#include "gauss.hpp"
+#include "sistemas_lineares.hpp"
 
 #include <cmath>
 #include <iostream>
@@ -40,7 +40,11 @@ void minimos_quadrados(int ordem, int numeroDePontos, double *c_pontosx,
     }
     matrizExtendida.push_back(matrizY[i]);
   }
-  auto resultado = gauss(matrizExtendida, ordem + 1);
+
+  std::vector<double> resultado;
+  resultado.reserve(ordem + 1);
+
+  gauss(matrizExtendida.data(), ordem + 1, resultado.data());
 
   for (auto i = 0; i <= ordem; ++i)
     out_resultados[i] = resultado[i];
