@@ -1,10 +1,13 @@
 #pragma once
 
 #include "zero_de_funcoes.hpp"
+#include <cstddef>
 
-#include <vector>
-
-using Polinomio = std::vector<double>;
+extern "C" {
+struct Polinomio {
+  double *addr;
+  size_t size;
+};
 
 struct ResultadoHorner {
   double polinomio, derivada;
@@ -12,6 +15,5 @@ struct ResultadoHorner {
 
 ResultadoHorner horner(Polinomio, const double x);
 
-_func_sig birgeVieta(const double eps1, const double eps2, double x, Polinomio polinomio);
-
 _func_sig birgeVieta(const int nIteracoes, double x, Polinomio polinomio);
+}

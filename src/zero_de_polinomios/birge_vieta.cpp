@@ -1,6 +1,12 @@
 #include "zero_de_polinomios.hpp"
 
-ResultadoHorner horner(Polinomio coeficientes, const double x) {
+#include <cmath>
+#include <vector>
+
+ResultadoHorner horner(Polinomio c_coeficientes, const double x) {
+  std::vector<double> coeficientes(c_coeficientes.addr,
+                                   c_coeficientes.addr + c_coeficientes.size);
+
   double resultado, derivada;
   resultado = derivada = coeficientes[0];
   for (int i = 1; i < coeficientes.size(); ++i) {
@@ -31,8 +37,7 @@ _func_sig birgeVieta(const double eps1, const double eps2, double x,
   return {x, iteracoes};
 }
 
-_func_sig birgeVieta(const int nIteracoes, double x,
-                     Polinomio polinomio) {
+_func_sig birgeVieta(const int nIteracoes, double x, Polinomio polinomio) {
   double xAnterior;
   auto resultado = horner(polinomio, x);
 
