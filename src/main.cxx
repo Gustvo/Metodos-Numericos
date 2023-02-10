@@ -73,16 +73,9 @@ int main(int nargs, char **cargs) {
   auto entrada = lerEntrada<double>();
 
   // testaLU(entrada); // { 4 2 4 }ᵀ
-  //  testaGauss(entrada);
+  testaGauss(entrada);
   //
-  std::vector<double> x = {1, 2, 3, 4, 5, 6, 7, 8};
-  std::vector<double> y = {0.5, 0.6, 0.9, 0.8, 1.2, 1.5, 1.7, 2.0};
-  const auto ordem = 2;
-  std::vector<double> resultado(ordem + 1);
-  minimos_quadrados(ordem, x.size(), x.data(), y.data(), resultado.data());
-
-  for (auto i : resultado)
-    std::cout << i << std::endl;
+  //
 
   return EXIT_SUCCESS;
 }
