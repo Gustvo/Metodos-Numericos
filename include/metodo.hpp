@@ -2,8 +2,8 @@
 
 #include "zero_de_funcoes.hpp"
 
-#include <string>
 #include <functional>
+#include <string>
 
 struct Metodo {
   std::string nome;
