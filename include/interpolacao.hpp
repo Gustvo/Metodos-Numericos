@@ -7,5 +7,6 @@ void interpolacaoSistemaLinear(const unsigned int numeroDePontos,
 double interpolacaoLagrange(const unsigned int numeroDePontos,
                             double *abscissas, double *ordenadas,
                             double pontoAInterpolar);
-void interpolacaoNewton();
+double interpolacaoNewton(const unsigned int numeroDePontos, double *abscissas,
+                          double *ordenadas, double pontoAInterpolar);
 }
